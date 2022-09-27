@@ -3,56 +3,56 @@ DROP DATABASE IF EXISTS SpotifyClone;
   CREATE DATABASE IF NOT EXISTS SpotifyClone;
   
   CREATE TABLE SpotifyClone.artists(
-      artist_id INT PRIMARY KEY AUTO_INCREMENT,
-      full_name VARCHAR(50) NOT NULL
+    artist_id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(50) NOT NULL
   ) engine = InnoDB;
   
   CREATE TABLE SpotifyClone.plans(
-      plan_id INT PRIMARY KEY AUTO_INCREMENT,
-      plan VARCHAR(50) NOT NULL,
-      value DECIMAL(5,2) NOT NULL
+    plan_id INT PRIMARY KEY AUTO_INCREMENT,
+    plan VARCHAR(50) NOT NULL,
+    value DECIMAL(5,2) NOT NULL
   ) ENGINE = InnoDB;
 
   CREATE TABLE SpotifyClone.users(
-      user_id INT PRIMARY KEY AUTO_INCREMENT,
-      full_name VARCHAR(50) NOT NULL,
-      age TINYINT NOT NULL,
-      signature_date DATE NOT NULL,
-      plan_id INT NOT NULL,
-      FOREIGN KEY (plan_id) REFERENCES plans(plan_id)
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(50) NOT NULL,
+    age TINYINT NOT NULL,
+    signature_date DATE NOT NULL,
+    plan_id INT NOT NULL,
+    FOREIGN KEY (plan_id) REFERENCES plans(plan_id)
   ) ENGINE = InnoDB;
   
   CREATE TABLE SpotifyClone.albuns(
-      album_id INT PRIMARY KEY AUTO_INCREMENT,
-      album VARCHAR(50) NOT NULL,
-      release_year YEAR NOT NULL,
-      artist_id INT NOT NULL,
-      FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
+    album_id INT PRIMARY KEY AUTO_INCREMENT,
+    album VARCHAR(50) NOT NULL,
+    release_year YEAR NOT NULL,
+    artist_id INT NOT NULL,
+    FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
   ) ENGINE = InnoDB;
   
   CREATE TABLE SpotifyClone.songs(
-      song_id INT PRIMARY KEY AUTO_INCREMENT,
-      name VARCHAR(50) NOT NULL,
+    song_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
 	  duration INT NOT NULL,
-      album_id INT NOT NULL,
-      FOREIGN KEY (album_id) REFERENCES albuns(album_id)
+    album_id INT NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES albuns(album_id)
   ) ENGINE = InnoDB;
   
   CREATE TABLE SpotifyClone.history(
 	  date DATETIME NOT NULL,
-      song_id INT NOT NULL,
-      user_id INT NOT NULL,
-      CONSTRAINT PRIMARY KEY (song_id, user_id),
-      FOREIGN KEY (song_id) REFERENCES songs(song_id),
-      FOREIGN KEY (user_id) REFERENCES users(user_id)
+    song_id INT NOT NULL,
+    user_id INT NOT NULL,
+    CONSTRAINT PRIMARY KEY (song_id, user_id),
+    FOREIGN KEY (song_id) REFERENCES songs(song_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
   ) ENGINE = InnoDB;
   
     CREATE TABLE SpotifyClone.following(
-      user_id INT NOT NULL,
+    user_id INT NOT NULL,
 	  artist_id INT NOT NULL,
-      CONSTRAINT PRIMARY KEY (user_id, artist_id),
-      FOREIGN KEY (user_id) REFERENCES users(user_id),
-      FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
+    CONSTRAINT PRIMARY KEY (user_id, artist_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
   ) ENGINE = InnoDB;
 
   INSERT INTO SpotifyClone.artists (full_name)

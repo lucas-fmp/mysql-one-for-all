@@ -1,6 +1,6 @@
 SELECT
 	art.full_name AS artista,
-    alb.album AS album
+  alb.album AS album
 FROM
 	SpotifyClone.artists AS art
 INNER JOIN
